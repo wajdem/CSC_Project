@@ -39,4 +39,26 @@ console.log(confPassword)
   }
 };
 
-module.exports = { signupUser, loginUser };
+//
+const activeUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Change the status to 'active'
+    user.status = 'active';
+    await user.save();
+
+    return res.json({ message: 'User status changed to active' });
+  } catch (error) {
+    return res.status(500).json({ error: 'An error occurred1' });
+  }
+};
+
+module.exports = { signupUser, loginUser,activeUser };

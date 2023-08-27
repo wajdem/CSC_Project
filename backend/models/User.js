@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: String,
+  default: "inactive"
 });
 
 module.exports = mongoose.model("User", userSchema);

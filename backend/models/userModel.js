@@ -22,6 +22,11 @@ const userSchema = new Schema({
   confPassword: {
     type: String,
   },
+  status: {
+    type: String,
+    required: true,
+    default: "inactive",
+  },
 });
 
 // static signup method
