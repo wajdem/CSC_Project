@@ -19,7 +19,6 @@ const App = () => {
       <NavigationContainer>
       <Nav/>
           <StatusBar />
-          {/* <Text>a</Text> */}
           <Navigator />
       </NavigationContainer>
     </AuthContextProvider>

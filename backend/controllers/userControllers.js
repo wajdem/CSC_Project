@@ -24,16 +24,15 @@ const loginUser = async (req, res) => {
 //signup user
 const signupUser = async (req, res) => {
 
- // res.send("hhhhh")
-  const {confPassword, username, email, password } = req.body;
-console.log(confPassword)
+  const { confPassword, username, email, password } = req.body;
+  console.log(confPassword);
   try {
     const user = await User.signup(username, email, password);
 
     //create a token
     const token = createToken(user._id);
 
-   res.status(200).json({ email, token });
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -48,17 +47,17 @@ const activeUser = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
 
     // Change the status to 'active'
-    user.status = 'active';
+    user.status = "active";
     await user.save();
 
-    return res.json({ message: 'User status changed to active' });
+    return res.json({ message: "User status changed to active" });
   } catch (error) {
-    return res.status(500).json({ error: 'An error occurred1' });
+    return res.status(500).json({ error: "An error occurred1" });
   }
 };
 
-module.exports = { signupUser, loginUser,activeUser };
+module.exports = { signupUser, loginUser, activeUser };

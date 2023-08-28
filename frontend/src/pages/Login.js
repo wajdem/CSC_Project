@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
 
+
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,7 +30,7 @@ const Login = () => {
         value={password} 
       />
 
-      <button disabled={isLoading}>Log in</button>
+      <button className="button" disabled={isLoading}>Log in</button>
       {error && <div className="error">{error}</div>}
     </form>
   )

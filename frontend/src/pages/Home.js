@@ -1,31 +1,45 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useSubjectContext  } from "../hooks/useSubjectContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+
+//compoents
+import SubjectDetails from "../components/SubjectDetails";
+import SubjectForm from "../components/SubjectForm";
 
 const Home = () => {
-  return (
-    <>
-<table class="grades-table">
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Passing Grade</th>
-        <th>Student's Grade</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Math</td>
-        <td>60</td>
-        <td>75</td>
-      </tr>
-      <tr>
-        <td>Science</td>
-        <td>50</td>
-        <td>65</td>
-      </tr>
-    </tbody>
-  </table>
-  </>
-  )
-}
+  const { subjects, dispatch } = useSubjectContext();
+  const { user } = useAuthContext();
 
-export default Home
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      const response = await fetch("/api/subject", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_SUBJECTS", payload: json });
+      }
+    };
+
+    if (user) {
+      fetchSubjects();
+    }
+  }, [dispatch]);
+
+  return (
+    <div className="home">
+      <div className="workouts">
+        {subjects &&
+          subjects.map((subject) => (
+            <SubjectDetails key={subject.id} subject={subject} />
+          ))}
+      </div>
+      <SubjectForm />
+    </div>
+  );
+};
+
+export default Home;

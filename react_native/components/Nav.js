@@ -23,7 +23,6 @@ const Navbar = () => {
         <View style={styles.nav}>
           {user ? (
             <View style={styles.userInfo}>
-              <Text style={styles.userInfoText}>{user.email}</Text>
               <TouchableOpacity onPress={handleClick} style={styles.logoutButton}>
                 <Text>Log out</Text>
               </TouchableOpacity>
@@ -52,7 +51,7 @@ const Navbar = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: 'blue',
+    backgroundColor: '#1aac83',
     paddingVertical: 10,
   },
   container: {

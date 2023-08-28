@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 
+
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +48,7 @@ const Signup = () => {
         onChange={(e) => setConfPassword(e.target.value)}
         value={confPassword}
       />
-      <button disabled={isLoading}>Sign up</button>
+      <button className="button" disabled={isLoading}>Sign up</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
