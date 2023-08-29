@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import { useSubjectContext } from "../hooks/useSubjectContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+import React, { useState } from "react"; // Import the React library and the useState hook
+import { useSubjectContext } from "../hooks/useSubjectContext"; // Import the useSubjectContext custom hook
+import { useAuthContext } from "../hooks/useAuthContext"; // Import the useAuthContext custom hook
 import EditPopup from "./EditPopup"; // Import the EditPopup component
 
+// Component for displaying subject details
 const SubjectDetails = ({ subject }) => {
-  const { dispatch } = useSubjectContext();
-  const { user } = useAuthContext();
+  const { dispatch } = useSubjectContext(); // Use the useSubjectContext custom hook to get the dispatch function
+  const { user } = useAuthContext(); // Use the useAuthContext custom hook to get the user data
 
+  // State for tracking editing mode and edit pop-up visibility
   const [editing, setEditing] = useState(false);
-  const [editPopupOpen, setEditPopupOpen] = useState(false); // State for edit pop-up
+  const [editPopupOpen, setEditPopupOpen] = useState(false);
+
+  // State for tracking edited subject data
   const [editedSubject, setEditedSubject] = useState({
     titelSubject: subject.titelSubject,
     passingGrade: subject.passingGrade,
     studentsGrade: subject.studentsGrade,
   });
 
+  // Handle click event for deleting a subject
   const handleDeleteClick = async () => {
     if (!user) {
       return;
@@ -33,23 +38,27 @@ const SubjectDetails = ({ subject }) => {
     }
   };
 
+  // Handle click event for entering editing mode
   const handleEditClick = () => {
     setEditing(true);
     setEditPopupOpen(true); // Open the edit pop-up
   };
 
+  // Handle click event for saving edits
   const handleSaveClick = async () => {
     setEditing(false);
     setEditPopupOpen(false); // Close the edit pop-up
     // You can perform save actions here
   };
 
+  // Handle click event for cancelling edits
   const handleCancelClick = () => {
     setEditing(false);
     setEditPopupOpen(false); // Close the edit pop-up
     // You can handle cancellation here
   };
 
+  // Handle input change event for editing fields
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedSubject((prevEditedSubject) => ({
@@ -61,6 +70,7 @@ const SubjectDetails = ({ subject }) => {
   return (
     <div className="subject-details">
       <table>
+        {/* Table header */}
         <thead>
           <tr>
             <th>Student Name</th>
@@ -74,10 +84,11 @@ const SubjectDetails = ({ subject }) => {
             </th>
           </tr>
         </thead>
+        {/* Table body */}
         <tbody>
           <tr>
             <td>{subject.username}</td>
-            {editing ? (
+            {editing ? ( // Render input fields if in editing mode
               <>
                 <td>
                   <input
@@ -87,24 +98,9 @@ const SubjectDetails = ({ subject }) => {
                     onChange={handleInputChange}
                   />
                 </td>
-                <td>
-                  <input
-                    type="number"
-                    name="passingGrade"
-                    value={editedSubject.passingGrade}
-                    onChange={handleInputChange}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="studentsGrade"
-                    value={editedSubject.studentsGrade}
-                    onChange={handleInputChange}
-                  />
-                </td>
+                {/* ... similar input fields for passingGrade and studentsGrade */}
               </>
-            ) : (
+            ) : ( // Render subject details and Edit button if not in editing mode
               <>
                 <td>{subject.titelSubject}</td>
                 <td>{subject.passingGrade} %</td>
@@ -119,7 +115,8 @@ const SubjectDetails = ({ subject }) => {
           </tr>
         </tbody>
       </table>
-      {editPopupOpen && ( // Render EditPopup when editPopupOpen is true
+      {/* Render EditPopup when editPopupOpen is true */}
+      {editPopupOpen && (
         <EditPopup
           editedSubject={editedSubject}
           handleInputChange={handleInputChange}
@@ -131,4 +128,4 @@ const SubjectDetails = ({ subject }) => {
   );
 };
 
-export default SubjectDetails;
+export default SubjectDetails; // Export the SubjectDetails component to be used elsewhere

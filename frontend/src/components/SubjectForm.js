@@ -82,7 +82,7 @@ const SubjectFrom = () => {
       />
 
       <button className="form_button">Add New Subject</button>
-      {/* {error && <div className="error">{error}</div>} */}
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

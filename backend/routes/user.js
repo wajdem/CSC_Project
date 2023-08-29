@@ -1,15 +1,17 @@
-const express = require('express')
+const express = require('express'); // Import the Express library
 
-//controller functions
-const { signupUser , loginUser,activeUser } = require('../controllers/userControllers')
+// Import the necessary controller functions from a relative path
+const { signupUser, loginUser, activeUser } = require('../controllers/userControllers');
 
-const router = express.Router()
+const router = express.Router(); // Create an instance of an Express Router
 
-//login route
-router.post('/login', loginUser)
+// Route to handle user login
+router.post('/login', loginUser);
 
-//signup route
-router.post('/signup', signupUser)
+// Route to handle user signup
+router.post('/signup', signupUser);
 
-router.patch('/active/:userId', activeUser)
-module.exports = router
+// Route to handle activating a user account
+router.patch('/active/:userId', activeUser);
+
+module.exports = router; // Export the router to be used in the main application file

@@ -25,10 +25,10 @@ const Home = ({}) => {
         </View>
         {subjects.map((subject, index) => (
           <View key={index} style={styles.dataRow}>
-            <Text style={styles.dataCell}></Text>
-            <Text style={styles.dataCell}></Text>
-            <Text style={styles.dataCell}></Text>
-            <Text style={styles.dataCell}></Text>
+            <Text style={styles.dataCell}>{subject.username}</Text>
+            <Text style={styles.dataCell}>{subject.titelSubject}</Text>
+            <Text style={styles.dataCell}>{subject.passingGrade}%</Text>
+            <Text style={styles.dataCell}>{subject.studentsGrade}%</Text>
           </View>
         ))}
     </View>

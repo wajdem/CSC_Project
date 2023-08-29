@@ -1,33 +1,35 @@
-const express = require('express');
+const express = require("express"); // Import the Express library
 
+// Import the necessary controller functions from a relative path
 const {
-    getSubjects,
-    getSubject,
-    createSubject,
-    deleteSubject,
-    updateSubject
-} = require('../controllers/subjectController')
-const requireAuth = require('../middleware/requireAuth')
+  getSubjects,
+  getSubject,
+  createSubject,
+  deleteSubject,
+  updateSubject,
+} = require("../controllers/subjectController");
 
-const router = express.Router()
+// Import the requireAuth middleware function for route authentication
+const requireAuth = require("../middleware/requireAuth");
 
-// require auth for all subject
-router.use(requireAuth)
+const router = express.Router(); // Create an instance of an Express Router
 
-// GET all subjects
-router.get('/', getSubjects)
+// Apply the requireAuth middleware to all routes under this router
+router.use(requireAuth);
 
-//GET a single subject
-router.get('/:id', getSubject)
+// Route to handle getting all subjects
+router.get("/", getSubjects);
 
-// POST a new subject
-router.post('/', createSubject)
+// Route to handle getting a single subject by ID
+router.get("/:id", getSubject);
 
-// DELETE a subject
-router.delete('/:id', deleteSubject)
+// Route to handle creating a new subject
+router.post("/", createSubject);
 
-// UPDATE a subject
-router.patch('/:id', updateSubject)
+// Route to handle deleting a subject by ID
+router.delete("/:id", deleteSubject);
 
+// Route to handle updating a subject by ID
+router.patch("/:id", updateSubject);
 
-module.exports = router
+module.exports = router; // Export the router to be used in the main application file
