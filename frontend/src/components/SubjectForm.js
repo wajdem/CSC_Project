@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useSubjectContext } from "../hooks/useSubjectContext";
+// import { useSubjectContext } from "../hooks/useSubjectContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const SubjectFrom = () => {
-  const { dispatch } = useSubjectContext;
+  // const { dispatch } = useSubjectContext;
   const { user } = useAuthContext();
-
+  const [username, setUserNmae ] = useState("");
   const [titelSubject, setTitelSubject] = useState("");
   const [passingGrade, setPassingGrade] = useState("");
   const [studentsGrade, setStudentsGrade] = useState("");
@@ -20,9 +20,9 @@ const SubjectFrom = () => {
       return;
     }
 
-    const subject = { titelSubject, passingGrade, studentsGrade };
+    const subject = { username, titelSubject, passingGrade, studentsGrade };
 
-    const response = await fetch("/api/subject", {
+    const response = await fetch("/api/subjects", {
       method: "POST",
       body: JSON.stringify(subject),
       headers: {
@@ -37,19 +37,27 @@ const SubjectFrom = () => {
       setEmptyFields(json.emptyFields);
     }
     if (response.ok) {
+      setUserNmae("");
       setTitelSubject("");
       setPassingGrade("");
       setStudentsGrade("");
       setError(null);
       setEmptyFields([]);
       console.log("new subject added ", json);
-      dispatch({ type: "CREATE_SUBJECT", payload: json });
+      // dispatch({ type: "CREATE_SUBJECT", payload: json });
     }
   };
 
   return (
-    <from className="create" onSubmit={handleSubmit}>
-      <label>Subject Name:</label>
+    <form className="create" onSubmit={handleSubmit}>
+      <label>User Name:</label>
+      <input
+        type="text"
+        onChange={(e) => setUserNmae(e.target.value)}
+        value={username}
+        className={emptyFields.includes("username") ? "error" : ""}
+      />
+      <label>Subject :</label>
       <input
         type="text"
         onChange={(e) => setTitelSubject(e.target.value)}
@@ -74,8 +82,8 @@ const SubjectFrom = () => {
       />
 
       <button className="form_button">Add New Subject</button>
-      {error && <div className="error">{error}</div>}
-    </from>
+      {/* {error && <div className="error">{error}</div>} */}
+    </form>
   );
 };
 export default SubjectFrom;

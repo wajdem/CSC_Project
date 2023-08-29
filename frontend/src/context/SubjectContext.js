@@ -4,7 +4,7 @@ export const SubjectContext = createContext();
 
 export const SebjectsReducer = (state, action) => {
   switch (action.type) {
-    case "SET_SUBJECT":
+    case "SET_SUBJECTS":
       return {
         subjects: action.payload,
       };
@@ -12,7 +12,7 @@ export const SebjectsReducer = (state, action) => {
       return {
         subjects: [action.payload, ...state.subjects],
       };
-    case "DELETE_SUBJECT":
+    case "DELETE_SUBJECTS":
       return {
         subjects: state.subjects.filter((w) => w._id !== action.payload._id),
       };

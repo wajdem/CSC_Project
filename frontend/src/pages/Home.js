@@ -12,12 +12,13 @@ const Home = () => {
 
   useEffect(() => {
     const fetchSubjects = async () => {
-      const response = await fetch("/api/subject", {
+      const response = await fetch("/api/subjects", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
       const json = await response.json();
+      console.log(json);
 
       if (response.ok) {
         dispatch({ type: "SET_SUBJECTS", payload: json });

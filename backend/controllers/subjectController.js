@@ -1,17 +1,18 @@
+const { response } = require("express");
 const Subject = require("../models/subjectModel");
 const mongoose = require("mongoose");
 
-// get all Subject
-const getSubject = async (req, res) => {
+// get all Subject 
+const getSubjects = async (req, res) => {
   const user_id = req.user.id;
 
-  const subject = await Subject.find({ user_id }.sort({ createAt: -1 }));
-
+  const subject = await Subject.find({ user_id });
+console.log(subject);
   res.status(200).json(subject);
 };
 
 // get a single Subject
-const getSubjects = async (req, res) => {
+const getSubject = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -29,10 +30,12 @@ const getSubjects = async (req, res) => {
 
 // create new Subject
 const createSubject = async (req, res) => {
-  const { titelSubject, passingGrade, studentsGrade } = req.body;
+  const { username, titelSubject, passingGrade, studentsGrade } = req.body;
 
   let emptyFields = [];
-
+  if (!username) {
+    emptyFields.push("username");
+  }
   if (!titelSubject) {
     emptyFields.push("titelSubject");
   }
@@ -50,12 +53,13 @@ const createSubject = async (req, res) => {
 
   // add doc to db
   try {
-    // const user_id = req.user._id;
+    const user_id = req.user._id;
     const subject = await Subject.create({
+      username,
       titelSubject,
       passingGrade,
       studentsGrade,
-      // user_id,
+      user_id,
     });
     res.status(200).json(subject);
   } catch (error) {

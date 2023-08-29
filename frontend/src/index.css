@@ -157,3 +157,60 @@ form.login {
    cursor: pointer;
    width: 122px;
 }
+table {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+ }
+ 
+ td, th {
+   border: 2px solid;
+   text-align: left;
+   padding: 8px;
+ }
+ 
+ tr:nth-child(even) {
+   background-color: #dddddd;
+ }
+ .form_button_edit{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 122px;
+ }
+ .form_button_delete{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 122px;
+ }
+ .form_button_cancel{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 80px;
+ }
+ .form_button_save{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 80px;
+   margin-right: 5px;
+
+ }
