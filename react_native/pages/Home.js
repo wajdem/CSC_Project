@@ -1,99 +1,70 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-const Home = () => {
+
+const Home = ({}) => {
+  
+  const subjects = [
+
+    { username: 'Adam', titelSubject: 'maths', passingGrade: 100 , studentsGrade: 95 },
+    { username: 'Aysar', titelSubject: 'Math', passingGrade: 100, studentsGrade: 85 },
+    { username: 'John', titelSubject: 'Math', passingGrade: 80, studentsGrade: 85 },
+    { username: 'John', titelSubject: 'Math', passingGrade: 80, studentsGrade: 85 },
+    { username: 'John', titelSubject: 'Math', passingGrade: 80, studentsGrade: 85 },
+    { username: 'John', titelSubject: 'Math', passingGrade: 80, studentsGrade: 85 },
+    { username: 'John', titelSubject: 'Math', passingGrade: 80, studentsGrade: 85 },
+  ];
+
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.tableRow}>
-          <Text style={styles.tableHeader}>Email</Text>
-          <Text style={styles.tableHeader}>User Name</Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text style={styles.tableCell}>wajde@gmail.com</Text>
-          <Text style={styles.tableCell}>Wajde</Text>
-        </View>
-      </View>
-      <View style={styles.containertwo}>
+    <View style={styles.container}>
         <View style={styles.headerRow}>
-          <Text style={styles.headerCell}>Course Name</Text>
-          <Text style={styles.headerCell}>Passing Mark</Text>
-          <Text style={styles.headerCell}>Student's Mark</Text>
+          <Text style={styles.headerCell}>Username</Text>
+          <Text style={styles.headerCell}>Subject</Text>
+          <Text style={styles.headerCell}>Passing Grade</Text>
+          <Text style={styles.headerCell}>Students Grade</Text>
         </View>
-        <View style={styles.dataRow}>
-          <Text style={styles.dataCell}>Math</Text>
-          <Text style={styles.dataCell}>90 %</Text>
-          <Text style={styles.dataCell}>80 %</Text>
-        </View>{" "}
-        <View style={styles.dataRow}>
-          <Text style={styles.dataCell}>history</Text>
-          <Text style={styles.dataCell}>100 %</Text>
-          <Text style={styles.dataCell}>70 %</Text>
-        </View>{" "}
-        <View style={styles.dataRow}>
-          <Text style={styles.dataCell}>physics</Text>
-          <Text style={styles.dataCell}>75 %</Text>
-          <Text style={styles.dataCell}>75 %</Text>
-        </View>{" "}
-        <View style={styles.dataRow}>
-          <Text style={styles.dataCell}>chemistry</Text>
-          <Text style={styles.dataCell}>95 %</Text>
-          <Text style={styles.dataCell}>90 %</Text>
-        </View>
-      </View>
-    </>
+        {subjects.map((subject, index) => (
+          <View key={index} style={styles.dataRow}>
+            <Text style={styles.dataCell}></Text>
+            <Text style={styles.dataCell}></Text>
+            <Text style={styles.dataCell}></Text>
+            <Text style={styles.dataCell}></Text>
+          </View>
+        ))}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  table: {
-    borderWidth: 1,
-    borderColor: "black",
-    width: "80%",
-    padding: 10,
-  },
-  tableRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderColor: "black",
-    paddingVertical: 5,
-  },
-  tableHeader: {
-    fontWeight: "bold",
-    flex: 1,
-    textAlign: "center",
-  },
-  tableCell: {
-    flex: 1,
-    textAlign: "center",
-  },
-  containertwo: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    marginBottom: 10,
+    padding: 16,
+    backgroundColor: '#f0f0f0',
   },
   headerRow: {
-    flexDirection: "row",
-    backgroundColor: "#f2f2f2",
-    padding: 10,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginBottom: 8,
   },
   headerCell: {
     flex: 1,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#333',
+    paddingVertical: 8,
   },
   dataRow: {
-    flexDirection: "row",
-    padding: 10,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginBottom: 4,
   },
   dataCell: {
     flex: 1,
+    fontSize: 16,
+    color: '#666',
+    paddingVertical: 8,
   },
 });
 

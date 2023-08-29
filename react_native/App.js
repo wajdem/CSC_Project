@@ -7,19 +7,25 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { StatusBar,View, Text } from "react-native";
 
 import { AuthContextProvider } from "./context/AuthContext";
-import Navigator from "./Navigator";
+
+// import Navigator from "./Navigator";
 import Nav from "./components/Nav"
+import Home from "./pages/Home"; ;
+
 
 
 const App = () => {
-  
+
+
 
   return (
+
     <AuthContextProvider>
       <NavigationContainer>
-      <Nav/>
+          <Nav/>
+          <Home/>
           <StatusBar />
-          <Navigator />
+          {/* <Navigator /> */}
       </NavigationContainer>
     </AuthContextProvider>
   );

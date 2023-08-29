@@ -25,8 +25,8 @@ const Navbar = () => {
           )}
           {!user && (
             <div>
-              <button style={{marginRight:"10px "}}><Link to="/login">Login</Link></button>
-              <button><Link to="/signup">Signup</Link></button>
+              {/* <button style={{marginRight:"10px "}}><Link to="/login">Login</Link></button> */}
+              {/* <button><Link to="/signup">Signup</Link></button> */}
             </div>
           )}
         </nav>

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useSubjectContext } from "../hooks/useSubjectContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import EditPopup from "./EditPopup"; // Import the EditPopup component
 
 const SubjectDetails = ({ subject }) => {
   const { dispatch } = useSubjectContext();
   const { user } = useAuthContext();
 
   const [editing, setEditing] = useState(false);
+  const [editPopupOpen, setEditPopupOpen] = useState(false); // State for edit pop-up
   const [editedSubject, setEditedSubject] = useState({
     titelSubject: subject.titelSubject,
     passingGrade: subject.passingGrade,
@@ -33,14 +35,19 @@ const SubjectDetails = ({ subject }) => {
 
   const handleEditClick = () => {
     setEditing(true);
+    setEditPopupOpen(true); // Open the edit pop-up
   };
 
   const handleSaveClick = async () => {
     setEditing(false);
+    setEditPopupOpen(false); // Close the edit pop-up
+    // You can perform save actions here
   };
 
   const handleCancelClick = () => {
     setEditing(false);
+    setEditPopupOpen(false); // Close the edit pop-up
+    // You can handle cancellation here
   };
 
   const handleInputChange = (event) => {
@@ -56,15 +63,12 @@ const SubjectDetails = ({ subject }) => {
       <table>
         <thead>
           <tr>
-            <th>User Name</th>
+            <th>Student Name</th>
             <th>Subject</th>
             <th>Passing Grade</th>
             <th>Students Grade</th>
             <th>
-              <button
-                className="form_button_delete"
-                onClick={handleDeleteClick}
-              >
+              <button className="form_button_delete" onClick={handleDeleteClick}>
                 Delete
               </button>
             </th>
@@ -99,20 +103,6 @@ const SubjectDetails = ({ subject }) => {
                     onChange={handleInputChange}
                   />
                 </td>
-                <td>
-                  <button
-                    className="form_button_save"
-                    onClick={handleSaveClick}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="form_button_cancel"
-                    onClick={handleCancelClick}
-                  >
-                    Cancel
-                  </button>
-                </td>
               </>
             ) : (
               <>
@@ -120,10 +110,7 @@ const SubjectDetails = ({ subject }) => {
                 <td>{subject.passingGrade} %</td>
                 <td>{subject.studentsGrade} %</td>
                 <td>
-                  <button
-                    className="form_button_edit"
-                    onClick={handleEditClick}
-                  >
+                  <button className="form_button_edit" onClick={handleEditClick}>
                     Edit
                   </button>
                 </td>
@@ -132,66 +119,16 @@ const SubjectDetails = ({ subject }) => {
           </tr>
         </tbody>
       </table>
+      {editPopupOpen && ( // Render EditPopup when editPopupOpen is true
+        <EditPopup
+          editedSubject={editedSubject}
+          handleInputChange={handleInputChange}
+          handleSaveClick={handleSaveClick}
+          handleCancelClick={handleCancelClick}
+        />
+      )}
     </div>
   );
 };
 
 export default SubjectDetails;
-
-// import React from "react";
-// import { useSubjectContext } from "../hooks/useSubjectContext";
-// import { useAuthContext } from "../hooks/useAuthContext";
-
-// const SubjectDetails = ({ subject }) => {
-//   const { dispatch } = useSubjectContext();
-//   const { user } = useAuthContext();
-
-//   const handleDeleteClick = async () => {
-//     if (!user) {
-//       return;
-//     }
-
-//     const response = await fetch("/api/subjects/" + subject._id, {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${user.token}`,
-//       },
-//     });
-//     const json = await response.json();
-
-//     if (response.ok) {
-//       dispatch({ type: "DELETE_SUBJECTS", payload: { _id: subject._id } });
-//     }
-//   };
-
-//   return (
-//     <div className="subject-details">
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>User Name</th>
-//             <th>Subject</th>
-//             <th>Passing Grade</th>
-//             <th>Students Grade</th>
-//             <th>Delete</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           <tr>
-//             <td>{subject.username}</td>
-//             <td>{subject.titelSubject}</td>
-//             <td>{subject.passingGrade} %</td>
-//             <td>{subject.studentsGrade} %</td>
-//             <td>
-//               <button className="form_button_delete" onClick={handleDeleteClick}>
-//                 Delete
-//               </button>
-//             </td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default SubjectDetails;
