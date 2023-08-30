@@ -226,3 +226,39 @@ table {
    z-index: 1000; 
    width: 20%;
  }
+ .four_buttons{
+   display: flex;
+   gap: 286px;
+ }
+ .button-student{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 126px;
+ }
+ /* Styling for the pop-up overlay */
+.popup {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.7);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+.fbutton_CreateUser{
+   background: var(--primary);
+   border: 0;
+   color: #fff;
+   padding: 10px;
+   font-family: "Poppins";
+   border-radius: 4px;
+   cursor: pointer;
+   width: 126px;
+}

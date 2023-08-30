@@ -2,6 +2,8 @@ import { useState } from "react";
 // import { useSubjectContext } from "../hooks/useSubjectContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
+
+
 const SubjectFrom = () => {
   // const { dispatch } = useSubjectContext;
   const { user } = useAuthContext();
@@ -49,6 +51,8 @@ const SubjectFrom = () => {
   };
 
   return (
+  <>
+
     <form className="create" onSubmit={handleSubmit}>
       <label>User Name:</label>
       <input
@@ -84,6 +88,10 @@ const SubjectFrom = () => {
       <button className="form_button">Add New Subject</button>
       {error && <div className="error">{error}</div>}
     </form>
+
+    </>
+    
+
   );
 };
 export default SubjectFrom;

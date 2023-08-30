@@ -5,6 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 //compoents
 import SubjectDetails from "../components/SubjectDetails";
 import SubjectForm from "../components/SubjectForm";
+import FourButton from "../components/FourButton";
 
 const Home = () => {
   const { subjects, dispatch } = useSubjectContext();
@@ -31,6 +32,10 @@ const Home = () => {
   }, [dispatch]);
 
   return (
+    <>
+
+    
+    <FourButton/>
     <div className="home">
       <div className="workouts">
         {subjects &&
@@ -40,6 +45,7 @@ const Home = () => {
       </div>
       <SubjectForm />
     </div>
+    </>
   );
 };
 

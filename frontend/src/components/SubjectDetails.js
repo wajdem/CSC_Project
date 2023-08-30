@@ -1,9 +1,10 @@
-import React, { useState } from "react"; // Import the React library and the useState hook
-import { useSubjectContext } from "../hooks/useSubjectContext"; // Import the useSubjectContext custom hook
-import { useAuthContext } from "../hooks/useAuthContext"; // Import the useAuthContext custom hook
-import EditPopup from "./EditPopup"; // Import the EditPopup component
+import React, { useState } from "react";
+import { useSubjectContext } from "../hooks/useSubjectContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import EditPopup from "./EditPopup";
 
-// Component for displaying subject details
+
+
 const SubjectDetails = ({ subject }) => {
   const { dispatch } = useSubjectContext(); // Use the useSubjectContext custom hook to get the dispatch function
   const { user } = useAuthContext(); // Use the useAuthContext custom hook to get the user data
@@ -37,7 +38,7 @@ const SubjectDetails = ({ subject }) => {
       dispatch({ type: "DELETE_SUBJECTS", payload: { _id: subject._id } });
     }
   };
-  
+
   // Handle click event for entering editing mode
   const handleEditClick = () => {
     setEditing(true);
@@ -49,17 +50,16 @@ const SubjectDetails = ({ subject }) => {
     setEditing(false);
     setEditPopupOpen(false); // Close the edit pop-up
     console.log("editedSubject", editedSubject);
-    console.log(subject._id)
-    fetch("/api/subjects/" + subject._id, {
+    console.log(subject._id);
+    await fetch("/api/subjects/" + subject._id, {
       method: "PATCH",
-      bady: JSON.stringify(editedSubject),
-    
+      body: JSON.stringify(editedSubject), // Fix typo: change 'bady' to 'body'
       headers: {
         Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json", // Make sure to include the Content-Type header
       },
     });
   };
-
 
   // Handle click event for cancelling edits
   const handleCancelClick = () => {
@@ -78,64 +78,77 @@ const SubjectDetails = ({ subject }) => {
   };
 
   return (
-    <div className="subject-details">
-      <table>
-        {/* Table header */}
-        <thead>
-          <tr>
-            <th>Student Name</th>
-            <th>Subject</th>
-            <th>Passing Grade</th>
-            <th>Students Grade</th>
-            <th>
-              <button className="form_button_delete" onClick={handleDeleteClick}>
-                Delete
-              </button>
-            </th>
-          </tr>
-        </thead>
-        {/* Table body */}
-        <tbody>
-          <tr>
-            <td>{subject.username}</td>
-            {editing ? ( // Render input fields if in editing mode
-              <>
-                <td>
-                  <input
-                    type="text"
-                    name="titelSubject"
-                    value={editedSubject.titelSubject}
-                    onChange={handleInputChange}
-                  />
-                </td>
-                {/* ... similar input fields for passingGrade and studentsGrade */}
-              </>
-            ) : ( // Render subject details and Edit button if not in editing mode
-              <>
-                <td>{subject.titelSubject}</td>
-                <td>{subject.passingGrade} %</td>
-                <td>{subject.studentsGrade} %</td>
-                <td>
-                  <button className="form_button_edit" onClick={handleEditClick}>
-                    Edit
-                  </button>
-                </td>
-              </>
-            )}
-          </tr>
-        </tbody>
-      </table>
-      {/* Render EditPopup when editPopupOpen is true */}
-      {editPopupOpen && (
-        <EditPopup
-          editedSubject={editedSubject}
-          handleInputChange={handleInputChange}
-          handleSaveClick={handleSaveClick}
-          handleCancelClick={handleCancelClick}
-        />
-      )}
-    </div>
+    <>
+      {/* <div className="four_buttons">
+        <button className="button-student">New User</button>
+        <button className="button-student">New Subject</button>
+        <button className="button-student">Subject Student</button>
+        <button className="button-student">Set Mark</button>
+      </div> */}
+      <div className="subject-details">
+        <table>
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Subject</th>
+              <th>Passing Grade</th>
+              <th>Students Grade</th>
+              <th>
+                <button
+                  className="form_button_delete"
+                  onClick={handleDeleteClick}
+                >
+                  Delete
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{subject.username}</td>
+              {editing ? ( // Render input fields if in editing mode
+                <>
+                  <td>
+                    <input
+                      type="text"
+                      name="titelSubject"
+                      value={editedSubject.titelSubject}
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                  {/* ... similar input fields for passingGrade and studentsGrade */}
+                </>
+              ) : (
+                // Render subject details and Edit button if not in editing mode
+                <>
+                  <td>{subject.titelSubject}</td>
+                  <td>{subject.passingGrade} %</td>
+                  <td>{subject.studentsGrade} %</td>
+                  <td>
+                    <button
+                      className="form_button_edit"
+                      onClick={handleEditClick}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </>
+              )}
+            </tr>
+          </tbody>
+        </table>
+        {/* Render EditPopup when editPopupOpen is true */}
+        {editPopupOpen && (
+          <EditPopup
+            editedSubject={editedSubject}
+            handleInputChange={handleInputChange}
+            handleSaveClick={handleSaveClick}
+            handleCancelClick={handleCancelClick}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
-export default SubjectDetails; // Export the SubjectDetails component to be used elsewhere
+export default SubjectDetails;
