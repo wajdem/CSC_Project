@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NGROK_URL } from '@env';
+// import { NGROK_URL } from '@env';
 
 export const useSignup = () => {
-  const [uri, setUri] = useState(`${NGROK_URL}/api/user/signup`)
+  // const [uri, setUri] = useState(`${NGROK_URL}/api/user/signup`)
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
@@ -17,7 +17,7 @@ export const useSignup = () => {
     setError(null);
 
     try {
-      const response = await fetch(uri, {
+      const response = await fetch(`https://d1ab-109-107-236-124.ngrok.io/api/user/signup`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ username, email, password, confPassword })

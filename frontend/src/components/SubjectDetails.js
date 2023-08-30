@@ -37,7 +37,7 @@ const SubjectDetails = ({ subject }) => {
       dispatch({ type: "DELETE_SUBJECTS", payload: { _id: subject._id } });
     }
   };
-
+  
   // Handle click event for entering editing mode
   const handleEditClick = () => {
     setEditing(true);
@@ -48,8 +48,18 @@ const SubjectDetails = ({ subject }) => {
   const handleSaveClick = async () => {
     setEditing(false);
     setEditPopupOpen(false); // Close the edit pop-up
-    // You can perform save actions here
+    console.log("editedSubject", editedSubject);
+    console.log(subject._id)
+    fetch("/api/subjects/" + subject._id, {
+      method: "PATCH",
+      bady: JSON.stringify(editedSubject),
+    
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
   };
+
 
   // Handle click event for cancelling edits
   const handleCancelClick = () => {

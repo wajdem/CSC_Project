@@ -4,9 +4,9 @@ import { StatusBar,View, Text } from "react-native";
 import { AuthContextProvider } from "./context/AuthContext";
 
 
-// import Navigator from "./Navigator";
+import Navigator from "./Navigator";
 import Nav from "./components/Nav"
-import Home from "./pages/Home"; ;
+// import Home from "./pages/Home"; ;
 
 
 
@@ -19,9 +19,9 @@ const App = () => {
     <AuthContextProvider>
       <NavigationContainer>
           <Nav/>
-          <Home/>
+          {/* <Home/> */}
           <StatusBar />
-          {/* <Navigator /> */}
+          <Navigator />
       </NavigationContainer>
     </AuthContextProvider>
   );
