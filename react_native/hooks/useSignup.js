@@ -17,7 +17,7 @@ export const useSignup = () => {
     setError(null);
 
     try {
-      const response = await fetch(`https://d1ab-109-107-236-124.ngrok.io/api/user/signup`, {
+      const response = await fetch(`https://1b30-109-107-236-124.ngrok.io/api/user/signup`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ username, email, password, confPassword })

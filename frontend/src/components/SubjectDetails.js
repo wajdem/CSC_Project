@@ -79,12 +79,6 @@ const SubjectDetails = ({ subject }) => {
 
   return (
     <>
-      {/* <div className="four_buttons">
-        <button className="button-student">New User</button>
-        <button className="button-student">New Subject</button>
-        <button className="button-student">Subject Student</button>
-        <button className="button-student">Set Mark</button>
-      </div> */}
       <div className="subject-details">
         <table>
           <thead>
@@ -152,3 +146,5 @@ const SubjectDetails = ({ subject }) => {
 };
 
 export default SubjectDetails;
+
+
